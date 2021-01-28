@@ -1,0 +1,26 @@
+body {
+  background-color: yellow;
+}
+h1 {
+  color: blue;
+}
+p {
+  color: red;
+}
+.class1 {
+    background-color: tomato;
+    color: white;
+    border: 2px solid black;
+    margin: 20px;
+    padding: 20px;
+}
+.class2 {
+    background-color: royalblue;
+    color: white;
+    border: 2px solid black;
+    margin: 20px;
+    padding: 20px;
+}
+div {
+  background-color: red;
+}
