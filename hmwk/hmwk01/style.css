@@ -1,0 +1,46 @@
+.bordered {
+  border: 4px solid #ee275c;
+  border-collapse: collapse;
+  border-radius: 4em;
+}
+
+p {
+  color: #ff0000;
+}
+
+#footer p {
+  background-color: white;
+  padding-left: 4em;
+}
+
+div {
+  background-color: #ffff00;
+  font: "Cambria" Utopia serif;
+}
+
+.class1 {
+  background-color: tomato;
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+
+.class2 {
+  background-color: royalblue;
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+
+h1 {
+  color: #0000ff;
+  background-color: #ff0000;
+}
+
+h2 {
+  color: #ff0000;
+  background-color: #0000ff;
+}
+/*# sourceMappingURL=style.css.map */

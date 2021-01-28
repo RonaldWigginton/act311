@@ -1,11 +1,11 @@
 body {
-  background-color: yellow;
+  background-color: #ffff00;
 }
 h1 {
-  color: blue;
+  color: #0000ff;
 }
 p {
-  color: red;
+  color: #ff0000;
 }
 .class1 {
     background-color: tomato;

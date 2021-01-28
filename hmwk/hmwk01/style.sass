@@ -1,20 +1,39 @@
-$AColor : #060606;
-$BColor: #e6bd21;
+$AColor : #0000ff;
+$BColor: #ff0000;
+$CColor : #ffff00;
 $accentColor: #ee275c;
 $borderFormat: 4px solid $accentColor
 $fontStack: "Cambria" Utopia serif
 $paperColor: white;
 
+body
+    
 .bordered
     border: $borderFormat
     border-collapse: collapse
     border-radius: 4em
     
-
+p
+    color : $BColor
 #footer
-    h2
+    p
         background-color: $paperColor
         padding-left: 4em
+div
+    background-color: $CColor
+    font: $fontStack;
+.class1 
+    background-color: tomato;
+    color: white;
+    border: 2px solid black;
+    margin: 20px;
+    padding: 20px;
+.class2 
+    background-color: royalblue;
+    color: white;
+    border: 2px solid black;
+    margin: 20px;
+    padding: 20px;
 
 h1 
     color: $AColor
