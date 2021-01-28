@@ -2,11 +2,13 @@ $AColor : #0000ff;
 $BColor: #ff0000;
 $CColor : #ffff00;
 $accentColor: #ee275c;
+$backColor: #ffff00;
 $borderFormat: 4px solid $accentColor
 $fontStack: "Cambria" Utopia serif
 $paperColor: white;
 
 body
+    background-color: $backColor
     
 .bordered
     border: $borderFormat
@@ -19,9 +21,6 @@ p
     p
         background-color: $paperColor
         padding-left: 4em
-div
-    background-color: $CColor
-    font: $fontStack;
 .class1 
     background-color: tomato;
     color: white;
@@ -30,7 +29,7 @@ div
     padding: 20px;
 .class2 
     background-color: royalblue;
-    color: white;
+    color: $paperColor;
     border: 2px solid black;
     margin: 20px;
     padding: 20px;
