@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+       
+       
+    function getRandomImage(){
+        const randomImageApiUrl = "https://dog.ceo/api/breeds/image/random";
+
+        // we are using fetch api to make rest api calls. you can use axios use.
+        // we are also using promises here. 
+        fetch(randomImageApiUrl)
+            .then(function(response){
+            // we get raw response. need to first convert it into json format so we can use the data easily
+            return response.json();
+            })
+            .then(function(json){
+            // now we got the json . we can use this to update any data in html 
+            console.log(json);
+            var imageUrl = json.message;
+            //update the image with new random url
+            imageRandom.src=imageUrl;
+            });
+      }
+
+      function getGender(name){
+        //console.log(name);
+        
+        const url = "https://api.genderize.io?name="+name +"&country=US";
+        fetch(url)
+        .then(response => response.json())
+            .then(data => {
+          console.log(data.gender);
+          var message = data.gender
+          let gender = document.getElementById("gender");
+          
+          gender.innerHTML = message;
+          
+        })
+      }
+        function setName(){
+         var name = document.getElementById("name").value;
+         console.log(name);
+          getGender(name);
+        }
+        function main()
+        {  
+            const imageRandom = document.getElementById("imageRandom");
+            getRandomImage();
+
+
+        }
+    </script>
+</head>
+
+<body onload="main()">   
+    <div class="container">
+        <div class="row">
+          <div class="col">
+            <form action="/action_page.php">
+                <p>Enter Your name! We will guess your gender</p>
+                <label for="fnamelbl">First name:</label>
+                <input type="text" value="" onchange="setName()" id = "name">
+                <h2 id ="gender"></h2>
+                
+              </form>
+          </div>
+          <div class="col">
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            
+          </div>
+          <div class="col">
+            
+          </div>
+          <div class="col">
+            <img id="imageRandom"/>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
