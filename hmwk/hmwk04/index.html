@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script src="csmp.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const disc = ["ACT", "CSC", "MAT", "PHY"]; 
+
+        function makeTable(){
+
+            var i;
+            for (i = 0; i < disc.length; i++) {
+            
+            let lines = "";
+            for(key of courses){
+                var str = key.course;
+                if(str.includes(disc[i])){
+                if (key.hours == 0){
+                    lines+= "<tr class='bg-warning text-white'>";
+                }else{
+                    lines += "<tr>"
+                }
+                lines += "<td>"+key.course+"</td>";    
+                lines += "<td>"+key.crn+"</td>";
+                lines += "<td>"+key.title+"</td>"
+                lines += "<td>"+key.days+"</td>"
+                if(key.times.length>0){
+                lines += "<td>"+key.times+"</td>"
+                }
+                lines += "<td>"+key.instructor+"</td>"
+                lines += "</tr>"
+                
+                let theBody = document.getElementById("tableBody"+i);
+                theBody.innerHTML = lines;
+            }
+        }
+        
+           
+            
+        }
+    }
+        function main()
+        {   
+            disc.forEach(element => {
+            console.log("Here is a forEach loop :)")
+            });
+            makeTable();
+            fetch('https://www.reddit.com/r/hardwareswap/new/.json')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.data.children);
+            for (const child of data.data.children) {
+                console.log(child.data.title)
+        }
+    });
+    }
+
+    </script>
+</head>
+<body onload="main()">    
+    <h1>MWSU Courses</h1>
+    <table>
+        <thead><tr class="bg-dark text-white">
+            <th>Course</th>
+            <th>CRN</th>
+            <th>Title</th>
+            <th>Days</th>
+            <th>Time</th>
+            <th>Instructor</th>
+            </tr>
+        </thead>
+    <tbody id="tableBody0">
+    </tbody>
+    </table>
+    <table>
+        <thead><tr class="bg-dark text-white">
+            <th>Course</th>
+            <th>CRN</th>
+            <th>Title</th>
+            <th>Days</th>
+            <th>Time</th>
+            <th>Instructor</th>
+            </tr>
+        </thead>
+    <tbody id="tableBody1">
+    </tbody>
+    </table>
+    <table>
+        <thead><tr class="bg-dark text-white">
+            <th>Course</th>
+            <th>CRN</th>
+            <th>Title</th>
+            <th>Days</th>
+            <th>Time</th>
+            <th>Instructor</th>
+            </tr>
+        </thead>
+    <tbody id="tableBody2">
+    </tbody>
+    </table>
+    <table>
+        <thead><tr class="bg-dark text-white">
+            <th>Course</th>
+            <th>CRN</th>
+            <th>Title</th>
+            <th>Days</th>
+            <th>Time</th>
+            <th>Instructor</th>
+            </tr>
+        </thead>
+    <tbody id="tableBody3">
+    </tbody>
+    </table>
+</body>
+</html>

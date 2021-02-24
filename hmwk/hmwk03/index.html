@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script>
+        var colors = ["white", "green"];
+        var colorIndex = 0;
+        function clickHandler() 
+        {
+            var col = document.getElementById("top");
+            if( colorIndex >= colors.length ) {
+                colorIndex = 0;
+            }
+            col.style.backgroundColor = colors[colorIndex];
+            colorIndex++;
+        }
+
+        function pictureKitten()
+        {
+            var pic = document.getElementById("picture");
+            pic.src="kitten.jpg";
+            pic.alt="kitten";
+        }
+        function picturePuppy(){
+            var pic = document.getElementById("picture");
+            pic.src="puppy.jpeg";
+            pic.alt="puppy";
+        }
+        function myaddition(b){
+            var a = document.getElementById("#first").value;
+            var c = document.getElementById("span");
+            c.innerHTML = "= " + (Number(a)+ Number(b));
+
+        }
+    </script>
+</head>
+<body>
+    <div>
+    <h1 id="top">Top</h1>
+    
+    <button type="button" onclick="clickHandler()">Click Me!</button>
+    <button type="button" onclick="clickHandler()">Click Me too!</button>
+    </div>
+    <div>
+        <img id="picture" src="kitten.jpg" alt="kitten" width="200" height="200">
+        <button type="button" onclick="pictureKitten()">Kitten</button> 
+        <button type="button" onclick="picturePuppy()">Puppy</button>
+    </div>
+    <div>
+        <input type="number" id="#first">
+        <input type="number" id="#second" onchange="myaddition(this.value)">
+        <span id= "span">=</span>
+    </div>
+    
+    
+</body>
+</html>

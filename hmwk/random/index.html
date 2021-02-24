@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HWS GPU SCRAPER</title>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+        </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const disc = ["3060","3070", "3080", "3090"]; 
+
+        function makeTable(){
+
+            var i;
+            
+            
+            let lines = "";
+            fetch('https://www.reddit.com/r/hardwareswap/new/.json')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.data.children);
+            for(child of data.data.children){
+                var post = child.data;
+                var title = child.data.title;
+                if(post.link_flair_text== "SELLING"){
+                if (((title.includes(disc[0]) || title.includes(disc[1]) || title.includes(disc[2]) || title.includes(disc[3])))){
+                    lines+= "<tr class='bg-warning text-white'>";
+                }else{
+                    lines += "<tr>"
+                }
+                lines += "<td>"+post.title+"</td>";    
+                lines += "<td> <a href='"+post.url+"'>Post</a></td>";
+                if(post.selftext.includes("$")){
+                let cost = post.selftext    
+                lines += "<td>"+post.selftext+"</td>";
+                }
+                lines += "<td> <a href='https://www.reddit.com/message/compose/?to="+post.author+"'>Message</a></td>";
+                lines += "<td>"+post.author_flair_text+"</td>";  
+                
+                lines += "</tr>"
+                
+                let theBody = document.getElementById("tableBody0");
+                theBody.innerHTML = lines;
+            }
+        }
+    });
+}
+        function main()
+        {   
+            makeTable();
+            setTimeout ("window.location.reload(true)", 180000 );
+        }
+
+    </script>
+</head>
+<body onload="main()">    
+    <h1>Reddit GPU Scraping</h1>
+    <table>
+        <thead><tr class="bg-dark text-white">
+            <th>Title</th>
+            <th>Page</th>
+            <th>Text</th>
+            <th>User</th>
+            <th>Trades</th>
+            </tr>
+        </thead>
+    <tbody id="tableBody0">
+    </tbody>
+    </table>
+</body>
+</html>
