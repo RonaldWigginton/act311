@@ -58,9 +58,11 @@
             {
                // console.log(selectedInstructor);
                 //console.log(children[child].instructor)
+                if(children[child].hours >0){
                 if(selectedInstructor==children[child].instructor){
                     courses.push(new Course(children[child].course,children[child].title,children[child].days,children[child].hours,children[child].room,children[child].times))
                 }
+            }
             }
             // call a sort function
             courses.sort(function(a,b){
