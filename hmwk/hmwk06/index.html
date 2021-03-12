@@ -16,9 +16,9 @@
      
     
     async function myFetch() {
-    let heading = document.getElementById("heading");    
-    let response = await fetch('./CSMP.json');
-    heading.innerText ="Data is being received"
+        let heading = document.getElementById("heading");    
+        let response = await fetch('./CSMP.json');
+        heading.innerText ="Data is being received"
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
         heading.innerText ="Data Failed";
