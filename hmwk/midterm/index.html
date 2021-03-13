@@ -18,42 +18,39 @@
      
     
     async function myFetch() {
-        
         let heading = document.getElementById("heading");    
         //let response = await fetch('./CSMP.json');
         let response = await fetch('./all.json')
         heading.innerText ="Data is being received"
-    if (!response.ok) {
+    if (!response.ok) 
+    {
         throw new Error(`HTTP error! status: ${response.status}`);
         heading.innerText ="Data Failed";
     } else {
         heading.innerText="Data Reccieved";
         let myJson = await response.json();
-        for(child of myJson){
-                
-                if(!(departments.includes(child.dept)))
-                {
-                    departments.push(child); // build a list of departments
-                
-                }
+        for(child of myJson)
+        {    
+            if(!(departments.includes(child.dept)))                
+            {
+                departments.push(child); // build a list of departments
             }
+        }
             //heading.innerText="Courses";
             buildDepartmentList();
             document.getElementById("department").style.visibility = "visible";
-            
-            
         }
     }
 
     async function fetchInstructors() {
-        while(instructors.length > 0) {
-        instructors.pop();
-    }
+        // First clear out instructors list if populated
+        while(instructors.length > 0) 
+        {
+            instructors.pop();
+        }
          // file name we need to fetch from chosen Department
         let departmentFile= document.getElementById("departmentList").value;
-        
         let response = await fetch(departmentFile)
-        
         if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
         heading.innerText ="Data Failed";
@@ -77,17 +74,19 @@
         function buildDepartmentList(){
             let lines ="";
             let theBody = document.getElementById("departmentList");
-            for(child in departments){
-            lines+= "<option value="+departments[child].filename+">"+departments[child].dept+"</option>";
+            for(child in departments)
+            {
+                lines+= "<option value="+departments[child].filename+">"+departments[child].dept+"</option>";
             }
             theBody.innerHTML = lines;
         }
         function buildInstructorsList(){
             let lines = "";
             let theBody = document.getElementById("instructorslist");
-            for(instructor in instructors){
-           // console.log(instructors[instructor]);
-            lines+= "<option value="+instructors[instructor]+">"+instructors[instructor]+"</option>";
+            for(instructor in instructors)
+            {
+                // console.log(instructors[instructor]);
+                lines+= "<option value="+instructors[instructor]+">"+instructors[instructor]+"</option>";
             }
             theBody.innerHTML = lines;
         }
@@ -103,11 +102,13 @@
             {
                // console.log(selectedInstructor);
                 //console.log(children[child].instructor)
-                if(children[child].hours >0){
-                if(selectedInstructor==children[child].instructor){
-                    courses.push(new Course(children[child].course,children[child].title,children[child].days,children[child].hours,children[child].room,children[child].times))
+                if(children[child].hours >0)
+                {
+                    if(selectedInstructor==children[child].instructor)
+                        {
+                            courses.push(new Course(children[child].course,children[child].title,children[child].days,children[child].hours,children[child].room,children[child].times))
+                        }
                 }
-            }
             }
             // call a sort function
             courses.sort(function(a,b){
@@ -145,7 +146,6 @@
             })
 
             for(course in courses){
-                //lines+= "<div class ='row'>"
                 lines+= "<div class='col-1'>" + courses[course].course +"</div>"
                 lines+= "<div class='col-3'>" + courses[course].title +"</div>"
                 lines+= "<div class='col-1'>" + courses[course].hours +"</div>"
@@ -154,7 +154,7 @@
                 lines+= "<div class='col-1'>" + courses[course].room +"</div>"
                 lines+= "<div class='col-3'>" + selectedInstructor +"</div>"
 
-                //lines+= +"</div>"
+                
             }
             let list = document.getElementById("course");
             list.innerHTML = lines;
@@ -175,14 +175,11 @@
         {   
             // Hidden Lists
             document.getElementById("selections").style.visibility = "hidden";
-            
-
+    
             myFetch()
             .catch(e => {
             console.log('There has been a problem with your department fetch operation: ' + e.message);
-        });
-           let departmentFile= document.getElementById("departmentList").value;
-            
+        });        
         }
     </script>
 </head>
