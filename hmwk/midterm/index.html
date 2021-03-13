@@ -14,11 +14,14 @@
     <script>
      const instructors = [];
      const children = []; 
+     const departments =[];  
      
     
     async function myFetch() {
+        
         let heading = document.getElementById("heading");    
-        let response = await fetch('./CSMP.json');
+        //let response = await fetch('./CSMP.json');
+        let response = await fetch('./all.json')
         heading.innerText ="Data is being received"
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -27,17 +30,58 @@
         heading.innerText="Data Reccieved";
         let myJson = await response.json();
         for(child of myJson){
-                children.push(child);
-                if(!(instructors.includes(child.instructor)))
+                
+                if(!(departments.includes(child.dept)))
                 {
-                    instructors.push(child.instructor); // build a list of instructers
+                    departments.push(child); // build a list of departments
+                
                 }
             }
-            heading.innerText="Courses";
-            buildInstructorsList();
-            getCoursesForInstructor();
+            //heading.innerText="Courses";
+            buildDepartmentList();
+            document.getElementById("department").style.visibility = "visible";
+            
+            
         }
     }
+
+    async function fetchInstructors() {
+        while(instructors.length > 0) {
+        instructors.pop();
+    }
+         // file name we need to fetch from chosen Department
+        let departmentFile= document.getElementById("departmentList").value;
+        
+        let response = await fetch(departmentFile)
+        
+        if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+        heading.innerText ="Data Failed";
+    } else {
+        heading.innerText="Data Reccieved";
+        let myJson = await response.json();
+        for(child of myJson){
+                children.push(child); // adding these courses to our list for later use 
+                
+                if(!(instructors.includes(child.instructor)))
+                {
+                    instructors.push(child.instructor); // build a list of instructors for given Department
+                    
+                }
+            }
+        buildInstructorsList();
+        document.getElementById("selections").style.visibility = "visible";
+        }
+    }
+
+        function buildDepartmentList(){
+            let lines ="";
+            let theBody = document.getElementById("departmentList");
+            for(child in departments){
+            lines+= "<option value="+departments[child].filename+">"+departments[child].dept+"</option>";
+            }
+            theBody.innerHTML = lines;
+        }
         function buildInstructorsList(){
             let lines = "";
             let theBody = document.getElementById("instructorslist");
@@ -129,21 +173,35 @@
         }
         function main()
         {   
+            // Hidden Lists
+            document.getElementById("selections").style.visibility = "hidden";
+            
+
             myFetch()
             .catch(e => {
-            console.log('There has been a problem with your fetch operation: ' + e.message);
+            console.log('There has been a problem with your department fetch operation: ' + e.message);
         });
+           let departmentFile= document.getElementById("departmentList").value;
+            
         }
     </script>
 </head>
 
 <body onload="main()">   
     
-    <label for="cars">Choose a instructor:</label>
-
-    <select name="instructors" id="instructorslist" onchange="getCoursesForInstructor()"></select>
-
     <h1 id =heading>Missouri Western State University Catalog</h1>
+    <div id="selections">
+    <div class="col-sm" id="department">
+    <label for="departments">Choose a Department:</label>
+    <select name="departments" id="departmentList" onchange="fetchInstructors()"></select>
+    </div>
+    <div class="col-sm" id="instructors">
+    <label for="instructors">Choose a instructor:</label>
+    <select name="instructors" id="instructorslist" onchange="getCoursesForInstructor()"></select>
+    </div>
+    </div>
+
+   
 
       
     <div class="container">
