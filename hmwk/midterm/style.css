@@ -1,0 +1,54 @@
+body {
+  background-color: #ffff00;
+}
+
+.bordered {
+  border: 4px solid #ee275c;
+  border-collapse: collapse;
+  border-radius: 4em;
+}
+
+p {
+  color: #6F6F6F;
+}
+
+#footer p {
+  background-color: white;
+  padding-left: 4em;
+}
+
+.container {
+  background-color: Gold;
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+
+.container #header {
+  background-color: Black;
+  color: white;
+}
+
+.container .row {
+  color: black;
+}
+
+.class2 {
+  background-color: royalblue;
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+
+h1 {
+  color: #ffff00;
+  background-color: #6F6F6F;
+}
+
+h2 {
+  color: #6F6F6F;
+  background-color: #0000ff;
+}
+/*# sourceMappingURL=style.css.map */
