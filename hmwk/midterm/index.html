@@ -19,11 +19,12 @@
     
     async function myFetch() {
         let heading = document.getElementById("heading");    
-        //let response = await fetch('./CSMP.json');
-        let response = await fetch('./all.json')
+        //let response = await fetch('./CSMP.json'); 
+        let response = await fetch('./bad.json')
         heading.innerText ="Data is being received"
+try {   
     if (!response.ok) 
-    {
+    {   
         throw new Error(`HTTP error! status: ${response.status}`);
         heading.innerText ="Data Failed";
     } else {
@@ -38,11 +39,17 @@
         }
             //heading.innerText="Courses";
             buildDepartmentList();
+            fetchInstructors();
             document.getElementById("department").style.visibility = "visible";
         }
     }
+    catch (e){
+        console.log(e);
+    }
+    }
 
     async function fetchInstructors() {
+        let heading = document.getElementById("heading");   
         // First clear out instructors list if populated
         while(instructors.length > 0) 
         {
@@ -51,9 +58,12 @@
          // file name we need to fetch from chosen Department
         let departmentFile= document.getElementById("departmentList").value;
         let response = await fetch(departmentFile)
+        try {
         if (!response.ok) {
+            heading.innerText ="Data Failed";
+            document.getElementById("Footer").style.visibility= 'visible';
+            document.getElementById("Footer").innerHTML += "<li>" + "Couldnt Resolve " +departmentFile +"</li>";
         throw new Error(`HTTP error! status: ${response.status}`);
-        heading.innerText ="Data Failed";
     } else {
         heading.innerText="Data Reccieved";
         let myJson = await response.json();
@@ -69,7 +79,11 @@
         buildInstructorsList();
         document.getElementById("selections").style.visibility = "visible";
         }
+    } catch (e){
+        console.log(e);
     }
+}
+    
 
         function buildDepartmentList(){
             let lines ="";
@@ -212,10 +226,11 @@
             <div class="col-3">Instructor</div>
         </div>
         <div class="row" id="course">
-
         </div>
-
       </div>
-
+<div>
+    <footer class='bg-danger text-white' id="Footer">
+</div>
+</footer>
 </body>
 </html>
