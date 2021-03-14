@@ -14,13 +14,15 @@
     <script>
      const instructors = [];
      const children = []; 
-     const departments =[];  
-     
+     const departments =[];
+     const types = [];  
+     const courses = [];
+     const allCourses =[];
     
     async function myFetch() {
         let heading = document.getElementById("heading");    
         //let response = await fetch('./CSMP.json'); 
-        let response = await fetch('./bad.json')
+        let response = await fetch('./all.json')
         heading.innerText ="Data is being received"
 try {   
     if (!response.ok) 
@@ -49,6 +51,10 @@ try {
     }
 
     async function fetchInstructors() {
+        while(children.length > 0) 
+        {
+            children.pop();
+        }
         let heading = document.getElementById("heading");   
         // First clear out instructors list if populated
         while(instructors.length > 0) 
@@ -77,12 +83,223 @@ try {
                 }
             }
         buildInstructorsList();
+        fetchTypes();
         document.getElementById("selections").style.visibility = "visible";
         }
-    } catch (e){
-        console.log(e);
+        } catch (e){
+            console.log(e);
+        }
     }
-}
+
+    async function fetchTypes(){
+            while(types.length > 0) 
+        {
+            type.pop();
+        }
+        let response = await fetch('./ALH.json')
+        try {
+        if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+        let myJson = await response.json();
+        for(child of myJson){
+                allCourses.push(child); // adding these courses to our list for later use 
+                
+                if(!(types.includes(child.type)))
+                {
+                    types.push(child.type); // build a list of types
+                    
+                }
+            }
+        }
+        } catch (e){
+            console.log(e);
+        }
+
+        response = await fetch('./BIO.json')
+        try {
+        if (!response.ok) {
+
+        throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+        myJson = await response.json();
+        for(child of myJson){
+                allCourses.push(child); // adding these courses to our list for later use 
+                
+                if(!(types.includes(child.type)))
+                {
+                    types.push(child.type); // build a list of types
+                    
+                }
+            }
+        }
+        } catch (e){
+            console.log(e);
+        }
+
+         response = await fetch('./CHE.json')
+        try {
+        if (!response.ok) {
+
+        throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+        myJson = await response.json();
+        for(child of myJson){
+                allCourses.push(child); // adding these courses to our list for later use 
+                
+                if(!(types.includes(child.type)))
+                {
+                    types.push(child.type); // build a list of types
+                    
+                }
+            }
+        }
+        } catch (e){
+            console.log(e);
+        }
+
+         response = await fetch('./CSMP.json')
+        try {
+        if (!response.ok) {
+
+        throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+         myJson = await response.json();
+        for(child of myJson){
+                allCourses.push(child); // adding these courses to our list for later use 
+                
+                if(!(types.includes(child.type)))
+                {
+                    types.push(child.type); // build a list of types
+                    
+                }
+            }
+        }
+        } catch (e){
+            console.log(e);
+        }
+
+        response = await fetch('./HON.json')
+        try {
+        if (!response.ok) {
+
+        throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+        myJson = await response.json();
+        for(child of myJson){
+                allCourses.push(child); // adding these courses to our list for later use 
+                
+                if(!(types.includes(child.type)))
+                {
+                    types.push(child.type); // build a list of types
+                    
+                }
+            }
+        }
+        } catch (e){
+            console.log(e);
+        }
+
+        response = await fetch('./PED.json')
+        try {
+        if (!response.ok) {
+
+        throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+         myJson = await response.json();
+        for(child of myJson){
+                allCourses.push(child); // adding these courses to our list for later use 
+                
+                if(!(types.includes(child.type)))
+                {
+                    types.push(child.type); // build a list of types
+                    
+                }
+            }
+        }
+        } catch (e){
+            console.log(e);
+        }
+
+        response = await fetch('./PHY.json')
+        try {
+        if (!response.ok) {
+
+        throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+        myJson = await response.json();
+        for(child of myJson){
+                allCourses.push(child); // adding these courses to our list for later use 
+                
+                if(!(types.includes(child.type)))
+                {
+                    types.push(child.type); // build a list of types
+                    
+                }
+            }
+        }
+        } catch (e){
+            console.log(e);
+        }
+
+        response = await fetch('./TSL.json')
+        try {
+        if (!response.ok) {
+
+        throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+        myJson = await response.json();
+        for(child of myJson){
+                allCourses.push(child); // adding these courses to our list for later use 
+                
+                if(!(types.includes(child.type)))
+                {
+                    types.push(child.type); // build a list of types
+                    
+                }
+            }
+        }
+        } catch (e){
+            console.log(e);
+        }
+
+        response = await fetch('./UNV.json')
+        try {
+        if (!response.ok) {
+
+        throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+        myJson = await response.json();
+        for(child of myJson){
+                allCourses.push(child); // adding these courses to our list for later use 
+                
+                if(!(types.includes(child.type)))
+                {
+                    types.push(child.type); // build a list of types
+                    
+                }
+            }
+        }
+        } catch (e){
+            console.log(e);
+        }
+
+        getCoursesForType();
+        
+
+
+        }
+        function getCoursesForType(){
+            let lines ="";
+            let theBody = document.getElementById("typelist");
+            console.log(types)
+            for(child in types)
+            {
+                lines+= "<option value="+types[child]+">"+types[child]+"</option>";
+            }
+            theBody.innerHTML = lines;
+        }
+        
     
 
         function buildDepartmentList(){
@@ -104,10 +321,60 @@ try {
             }
             theBody.innerHTML = lines;
         }
-        
+
+        function getCoursesOfType()
+        {
+         
+
+        let lines ="";
+            var e = document.getElementById("typelist");
+            var val1 = e.options[e.selectedIndex].value;
+            let selectedType = e.options[e.selectedIndex].text;
+            
+            for(course in allCourses)
+            {
+               // console.log(selectedInstructor);
+                console.log(allCourses[course].type)
+                if(allCourses[course].hours >0)
+                {
+                    if(selectedType==allCourses[course].type)
+                        {
+                            lines+= "<div class='col-1'>" + allCourses[course].course +"</div>"
+                lines+= "<div class='col-3'>" + allCourses[course].title +"</div>"
+                lines+= "<div class='col-1'>" + allCourses[course].hours +"</div>"
+                lines+= "<div class='col-1'>" + allCourses[course].days +"</div>"
+                lines+= "<div class='col-1'>" + allCourses[course].times +"</div>"
+                lines+= "<div class='col-1'>" + allCourses[course].room +"</div>"
+                lines+= "<div class='col-2'>" + allCourses[course].type +"</div>"
+                lines+= "<div class='col-2'>" + allCourses[course].instructor +"</div>"
+                           // allCourses.push(new Course(allCourses[course].course,allCourses[course].title,allCourses[course].days,allCourses[course].hours,allCourses[course].room,allCourses[course].times,allCourses[course].type))
+                        }
+                        let list = document.getElementById("course");
+                        list.innerHTML = lines;
+                }
+            }
+
+            allCourses.sort(function(a,b){
+                var daya = a.course;
+                var dayb = b.course;
+                if(daya < dayb){
+                    return-1;
+                }
+                if(daya> dayb){
+                    return 1;
+                }
+            })
+
+ 
+            
+        }
+
         function getCoursesForInstructor(){
+            while(courses.length > 0) 
+        {
+            courses.pop();
+        }
             let lines ="";
-            courses = [];
             var e = document.getElementById("instructorslist");
             var val1 = e.options[e.selectedIndex].value;
             let selectedInstructor = e.options[e.selectedIndex].text;
@@ -115,12 +382,12 @@ try {
             for(child in children)
             {
                // console.log(selectedInstructor);
-                //console.log(children[child].instructor)
+                console.log(children[child].instructor)
                 if(children[child].hours >0)
                 {
                     if(selectedInstructor==children[child].instructor)
                         {
-                            courses.push(new Course(children[child].course,children[child].title,children[child].days,children[child].hours,children[child].room,children[child].times))
+                            courses.push(new Course(children[child].course,children[child].title,children[child].days,children[child].hours,children[child].room,children[child].times,children[child].type))
                         }
                 }
             }
@@ -164,9 +431,10 @@ try {
                 lines+= "<div class='col-3'>" + courses[course].title +"</div>"
                 lines+= "<div class='col-1'>" + courses[course].hours +"</div>"
                 lines+= "<div class='col-1'>" + courses[course].days +"</div>"
-                lines+= "<div class='col-2'>" + courses[course].times +"</div>"
+                lines+= "<div class='col-1'>" + courses[course].times +"</div>"
                 lines+= "<div class='col-1'>" + courses[course].room +"</div>"
-                lines+= "<div class='col-3'>" + selectedInstructor +"</div>"
+                lines+= "<div class='col-2'>" + courses[course].type +"</div>"
+                lines+= "<div class='col-2'>" + selectedInstructor +"</div>"
 
                 
             }
@@ -174,12 +442,13 @@ try {
             list.innerHTML = lines;
         }
 
-        function Course(course,title,days,hours,room,times){
+        function Course(course,title,days,hours,room,times,type){
             this.course = course;
             this.title = title;
             this.days = days;
             this.hours = hours;
             this.room = room;
+            this.type = type;
             this.times = times;
             this.print = function(){
                 return this.course + " " + this.title + " reports on " + this.days + " at " + this.times +" for "+this.hours +"hours in " + this.room;
@@ -207,9 +476,11 @@ try {
     <select name="departments" id="departmentList" onchange="fetchInstructors()"></select>
     </div>
     <div class="col-sm" id="instructors">
-    <label for="instructors">Choose a instructor:</label>
+    <label for="instructors">Choose a Instructor:</label>
     <select name="instructors" id="instructorslist" onchange="getCoursesForInstructor()"></select>
     </div>
+    <label for="types">Search By Type</label>
+    <select name="type" id="typelist" onchange="getCoursesOfType()"></select>
     </div>
 
    
@@ -221,9 +492,10 @@ try {
             <div class="col-3">Title</div>
             <div class="col-1">Hrs</div>
             <div class="col-1">Days</div>
-            <div class="col-2">Times</div>
+            <div class="col-1">Times</div>
             <div class="col-1">Room</div>
-            <div class="col-3">Instructor</div>
+            <div class="col-2">Type</div>
+            <div class="col-2">Instructor</div>
         </div>
         <div class="row" id="course">
         </div>
