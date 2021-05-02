@@ -2,7 +2,9 @@ const app = Vue.createApp({
     data : function() {
         return {
             coursesData: [],
-            picked: "",
+            pickedTitle: "",
+            pickedproffesor,
+
         }
     },
     methods :{
@@ -23,9 +25,13 @@ const app = Vue.createApp({
         });
     },
     computed: {
-        byTitle: function() {
-            return this.coursesData.filter( course =>
-                 course.title.toLowerCase().includes(this.picked.toLowerCase()));        
+        pickedselection: function() {
+            var selection;
+            selection = this.coursesData.filter( course =>
+                course.title.toLowerCase().includes(this.pickedtitle.toLowerCase()));
+            selection = selection.filter( course =>
+                course.instructor.toLowerCase().includes(this.pickedproffesor.toLowerCase()));
+            return selection;
         }
     },
     mounted() {
