@@ -25,14 +25,20 @@
 <body>
     <h1>MWSU Course Searcher</h1>
     <div id="appArea">
-        <label>Type a Title:</label>
+
+        <label>Type a CRN:</label>
+        <input type="text" v-model="pickedCrn">
+        <label>Type a Course Title:</label>
         <input type="text" v-model="pickedTitle">
         <label>Type a Proffesor:</label>
-        <input type="text" v-model="pickedproffesor">
+        <input type="text" v-model="pickedProffesor">
+        <label>Type a Day:</label>
+        <input type="text" v-model="pickedDay">
+     
         
         <div class="container">
             <div class="row" id="header">
-                <div class="col-1">Course</div>
+                <div class="col-1">CRN</div>
                 <div class="col-3">Title</div>
                 <div class="col-1">Hrs</div>
                 <div class="col-1">Days</div>
@@ -42,7 +48,7 @@
                 <div class="col-2">Instructor</div>
             </div>
         <div v-for="co of pickedselection" class="row" id="courses">
-            <div class="col-1">{{co.id}}</div>
+            <div class="col-1">{{co.crn}}</div>
             <div class="col-3">{{co.title}}</div>
             <div class="col-1">{{co.credits}}</div>
             <div class="col-1">{{co.meetings[0].day}}</div>

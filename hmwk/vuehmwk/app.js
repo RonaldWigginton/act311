@@ -2,8 +2,11 @@ const app = Vue.createApp({
     data : function() {
         return {
             coursesData: [],
+            pickedCrn: "",
             pickedTitle: "",
-            pickedproffesor,
+            pickedProffesor: "",
+            pickedDay: "",
+
 
         }
     },
@@ -26,11 +29,14 @@ const app = Vue.createApp({
     },
     computed: {
         pickedselection: function() {
-            var selection;
             selection = this.coursesData.filter( course =>
-                course.title.toLowerCase().includes(this.pickedtitle.toLowerCase()));
+                course.title.toLowerCase().includes(this.pickedTitle.toLowerCase()));  // filter by course title
+            selection = selection.filter(course =>
+                course.instructor.toLowerCase().includes(this.pickedProffesor.toLowerCase())); // Filter by instructors
             selection = selection.filter( course =>
-                course.instructor.toLowerCase().includes(this.pickedproffesor.toLowerCase()));
+                    course.crn.toLowerCase().includes(this.pickedCrn.toLowerCase())); // filter by CRN
+            selection = selection.filter( course =>
+                        course.meetings[0].day.toLowerCase().includes(this.pickedDay.toLowerCase())); // filter by Day[0]
             return selection;
         }
     },
