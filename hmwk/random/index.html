@@ -17,8 +17,6 @@
         const disc = ["3060","3070", "3080", "3090"]; 
 
         function makeTable(){
-
-            var i;
             
             
             let lines = "";
@@ -29,27 +27,26 @@
             for(child of data.data.children){
                 var post = child.data;
                 var title = child.data.title;
-                if(post.link_flair_text== "SELLING"){
-                if (((title.includes(disc[0]) || title.includes(disc[1]) || title.includes(disc[2]) || title.includes(disc[3])))){
-                    lines+= "<tr class='bg-warning text-white'>";
-                }else{
-                    lines += "<tr>"
+                if(post.link_flair_text== "SELLING" && (post.author_flair_text != null) && post.selftext.length > 0){
+                    if (((title.includes(disc[0]) || title.includes(disc[1]) || title.includes(disc[2]) || title.includes(disc[3])))){
+                        lines+= "<tr>"
+                    lines += "<td>"+post.title+"</td>";    
+                    lines += "<td> <a href='"+post.url+"'>Post</a></td>";
+                    if(post.selftext.includes("$")){
+                    let cost = post.selftext.indexOf("$");    
+                    let coststr = post.selftext.substring(post.selftext.indexOf("$"),post.selftext.indexOf("$") + 5);
+                    lines += "<td>" +coststr +"</td>";
+                    }
+                    lines += "<td> <a href='https://www.reddit.com/message/compose/?to="+post.author+"'>Message</a></td>";
+                    lines += "<td>"+post.author_flair_text+"</td>";  
+                    
+                    lines += "</tr>"
+                    
+                    let theBody = document.getElementById("tableBody0");
+                    theBody.innerHTML = lines;
+                    }
                 }
-                lines += "<td>"+post.title+"</td>";    
-                lines += "<td> <a href='"+post.url+"'>Post</a></td>";
-                if(post.selftext.includes("$")){
-                let cost = post.selftext    
-                lines += "<td>"+post.selftext+"</td>";
-                }
-                lines += "<td> <a href='https://www.reddit.com/message/compose/?to="+post.author+"'>Message</a></td>";
-                lines += "<td>"+post.author_flair_text+"</td>";  
-                
-                lines += "</tr>"
-                
-                let theBody = document.getElementById("tableBody0");
-                theBody.innerHTML = lines;
             }
-        }
     });
 }
         function main()
